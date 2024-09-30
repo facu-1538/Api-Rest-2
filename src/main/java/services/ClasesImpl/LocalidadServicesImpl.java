@@ -1,29 +1,30 @@
 package services;
 
-import entities.Domicilio;
+import entities.Localidad;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import repositories.DomicilioRepository;
+import repositories.LocalidadRepository;
+import services.Interfaaces.BaseServicio;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class DomicilioServices implements BaseServicio<Domicilio> {
+public class LocalidadServices implements BaseServicio<Localidad> {
 
     @Autowired
-    private DomicilioRepository domicilioRepository;
+    private LocalidadRepository localidadRepository;
 
-    public DomicilioServices(DomicilioRepository domicilioRepository){
-        this.domicilioRepository = domicilioRepository;
+    public LocalidadServices(LocalidadRepository localidadRepository){
+        this.localidadRepository = localidadRepository;
     }
 
     @Override
     @Transactional
-    public List<Domicilio> findAll() throws Exception {
+    public List<Localidad> findAll() throws Exception {
         try{
-            List<Domicilio> entities = domicilioRepository.findAll();
+            List<Localidad> entities = localidadRepository.findAll();
             return  entities;
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -32,9 +33,9 @@ public class DomicilioServices implements BaseServicio<Domicilio> {
 
     @Override
     @Transactional
-    public Domicilio findByid(long id) throws Exception {
+    public Localidad findByid(long id) throws Exception {
         try{
-            Optional<Domicilio> entitiesOpcional = domicilioRepository.findById(id);
+            Optional<Localidad> entitiesOpcional = localidadRepository.findById(id);
             return entitiesOpcional.get();
         } catch (Exception e) {
             throw new Exception(e.getMessage());
@@ -43,9 +44,9 @@ public class DomicilioServices implements BaseServicio<Domicilio> {
 
     @Override
     @Transactional
-    public Domicilio save(Domicilio entity) throws Exception {
+    public Localidad save(Localidad entity) throws Exception {
         try{
-            entity = domicilioRepository.save(entity);
+            entity = localidadRepository.save(entity);
             return entity;
         } catch (Exception e) {
             throw new Exception(e.getMessage());
@@ -54,12 +55,12 @@ public class DomicilioServices implements BaseServicio<Domicilio> {
 
     @Override
     @Transactional
-    public Domicilio update(long id, Domicilio entity) throws Exception {
+    public Localidad update(long id, Localidad entity) throws Exception {
         try{
-            Optional<Domicilio> entityOptional = domicilioRepository.findById(id);
-            Domicilio domicilio = entityOptional.get();
-            domicilio = domicilioRepository.save(domicilio);
-            return domicilio;
+            Optional<Localidad> entityOptional = localidadRepository.findById(id);
+            Localidad localidad = entityOptional.get();
+            localidad = localidadRepository.save(localidad);
+            return localidad;
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
@@ -69,8 +70,8 @@ public class DomicilioServices implements BaseServicio<Domicilio> {
     @Transactional
     public boolean delete(long id) throws Exception {
         try{
-            if (domicilioRepository.existsById(id)){
-                domicilioRepository.deleteById(id);
+            if (localidadRepository.existsById(id)){
+                localidadRepository.deleteById(id);
                 return true;
             }else {
                 throw new Exception();
